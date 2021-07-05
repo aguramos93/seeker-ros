@@ -12,17 +12,16 @@ def callback(data):
 
     print(mode_command, roll_command, pitch_command, yaw_command)
 
-    global seeker
-    seeker = seeker.Seeker()
+    my_seeker = seeker.Seeker()
 
     try:
-        seeker.open_serial()
+        my_seeker.open_serial()
         start_time = time.time()
-        roll_l, roll_h = seeker.calculate_angle(roll_command)
-        pitch_l, pitch_h = seeker.calculate_angle(pitch_command)
-        yaw_l, yaw_h = seeker.calculate_angle(yaw_command)
-        command = seeker.calculate_command(mode_command, roll_l, roll_h, pitch_l, pitch_h, yaw_l, yaw_h)
-        seeker.send_command(command)
+        roll_l, roll_h = my_seeker.calculate_angle(roll_command)
+        pitch_l, pitch_h = my_seeker.calculate_angle(pitch_command)
+        yaw_l, yaw_h = my_seeker.calculate_angle(yaw_command)
+        command = my_seeker.calculate_command(mode_command, roll_l, roll_h, pitch_l, pitch_h, yaw_l, yaw_h)
+        my_seeker.send_command(command)
 
     except KeyboardInterrupt:
         pass 

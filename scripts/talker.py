@@ -16,9 +16,12 @@ def talker():
     yaw = rospy.get_param('/yaw')
 
     angle.data = [mode, roll, pitch, yaw]
+    rate = rospy.Rate(10) # 10hz
 
-    rospy.loginfo(angle)
-    pub.publish(angle)
+    while not rospy.is_shutdown():
+        rospy.loginfo(angle)
+        pub.publish(angle)
+        rate.sleep()
 
 if __name__ == '__main__':
     try:

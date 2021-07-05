@@ -23,8 +23,11 @@ def dec2hex(dec):
 
         return hexa
 
-class Seeker():
+class Seeker:
 
+    def __init__(self):
+        print("seeker constructor")
+        
     def calculate_angle(self, angle):
         
         angle /= 0.02197265625 # 1 unit: 0.02197265625 degree
