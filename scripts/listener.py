@@ -17,10 +17,20 @@ def callback(data):
     try:
         my_seeker.open_serial()
         start_time = time.time()
-        roll_l, roll_h = my_seeker.calculate_angle(roll_command)
-        pitch_l, pitch_h = my_seeker.calculate_angle(pitch_command)
-        yaw_l, yaw_h = my_seeker.calculate_angle(yaw_command)
-        command = my_seeker.calculate_command(mode_command, roll_l, roll_h, pitch_l, pitch_h, yaw_l, yaw_h)
+
+        if mode_command == 5:
+            Ral, Rah = my_seeker.calculate_angle(roll_command)
+            Pal, Pah = my_seeker.calculate_angle(pitch_command)
+            Yal, Yah = my_seeker.calculate_angle(yaw_command)
+            Rsl, Rsh, Psl, Psh, Ysl, Ysh = 0, 0, 0, 0, 0, 0
+
+        elif mode_command == 1:
+            Rsl, Rsh = my_seeker.calculate_speed(roll_command)
+            Psl, Psh = my_seeker.calculate_speed(pitch_command)
+            Ysl, Ysh = my_seeker.calculate_speed(yaw_command)
+            Ral, Rah, Pal, Pah, Yal, Yah = 0, 0, 0, 0, 0, 0
+
+        command = my_seeker.calculate_command(mode_command, Rsl, Rsh, Ral, Rah, Psl, Psh, Pal, Pah, Ysl, Ysh, Yal, Yah)
         my_seeker.send_command(command)
 
     except KeyboardInterrupt:
