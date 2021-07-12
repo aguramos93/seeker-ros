@@ -84,7 +84,7 @@ class Seeker:
 
         return low, high
 
-    def calculate_command(self, mode, Rsl, Rsh, Ral, Rah, Psl, Psh, Pal, Pah, Ysl, Ysh, Yal, Yah):
+    def calculate_gimbal_cmd(self, mode, Rsl, Rsh, Ral, Rah, Psl, Psh, Pal, Pah, Ysl, Ysh, Yal, Yah):
 
         HEAD = [0xFF, 0x01, 0x0F, 0x10]
         CONTROL_MODE = [mode, mode, mode]
@@ -107,6 +107,46 @@ class Seeker:
         CHECKSUM = [checksum_m]
 
         command = HEAD + CONTROL_MODE + ROLL + PITCH + YAW + CHECKSUM
+
+        return command
+
+    def calculate_camera_cmd(self, cmr_cmd):
+
+        if cmr_cmd == 'zoom_out':
+            ZOOM_OUT = [0x81, 0x01, 0x04, 0x07, 0x37, 0xFF]
+            command = ZOOM_OUT
+        elif cmr_cmd == 'zoom_in':
+            ZOOM_IN = [0x81, 0x01, 0x04, 0x07, 0x27, 0xFF]
+            command = ZOOM_IN
+        elif cmr_cmd == 'stop_zoom':
+            STOP_ZOOM = [0x81, 0x01, 0x04, 0x07, 0x00, 0xFF]
+            command = STOP_ZOOM
+        elif cmr_cmd == 'focus_in':
+            FOCUS_IN = [0x81, 0x01, 0x04, 0x08, 0x27, 0xFF]
+            command = FOCUS_IN
+        elif cmr_cmd == 'focus_out':
+            FOCUS_OUT = [0x81, 0x01, 0x04, 0x08, 0x37, 0xFF]
+            command = FOCUS_OUT
+        elif cmr_cmd == 'stop_focus':
+            STOP_FOCUS = [0x81, 0x01, 0x04, 0x08, 0x00, 0xFF]
+            command = STOP_FOCUS
+        elif cmr_cmd == 'photo':
+            PHOTO = [0x81, 0x01, 0x04, 0x68, 0x01, 0xFF]
+            command = PHOTO
+        elif cmr_cmd == 'start_video':
+            START_VIDEO = [0x81, 0x01, 0x04, 0x68, 0x02, 0xFF]
+            command = START_VIDEO
+        elif cmr_cmd == 'stop_video':
+            STOP_VIDEO = [0x81, 0x01, 0x04, 0x68, 0x03, 0xFF]
+            command = STOP_VIDEO
+        elif cmr_cmd == 'invert':
+            INVERT = [0x81, 0x01, 0x04, 0x68, 0x04, 0xFF]
+            command = INVERT
+        elif cmr_cmd == 'switch':
+            SWITCH = [0x81, 0x01, 0x04, 0x68, 0x05, 0xFF]
+            command = SWITCH
+        else:
+            print("ERROR: Introduce a correct camera command!")
 
         return command
 

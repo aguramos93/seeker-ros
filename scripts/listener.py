@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 import rospy, seeker, time
 from std_msgs.msg import Int16MultiArray
+from std_msgs.msg import String
 import numpy as np
 
-def callback(data):
+def cbGimbal(data):
     
     mode_command = data.data[0]
     roll_command = data.data[1]
     pitch_command = data.data[2]
     yaw_command = data.data[3]
-
-    print(mode_command, roll_command, pitch_command, yaw_command)
 
     my_seeker = seeker.Seeker()
 
@@ -30,7 +29,23 @@ def callback(data):
             Ysl, Ysh = my_seeker.calculate_speed(yaw_command)
             Ral, Rah, Pal, Pah, Yal, Yah = 0, 0, 0, 0, 0, 0
 
-        command = my_seeker.calculate_command(mode_command, Rsl, Rsh, Ral, Rah, Psl, Psh, Pal, Pah, Ysl, Ysh, Yal, Yah)
+        command = my_seeker.calculate_gimbal_cmd(mode_command, Rsl, Rsh, Ral, Rah, Psl, Psh, Pal, Pah, Ysl, Ysh, Yal, Yah)
+        my_seeker.send_command(command)
+
+    except KeyboardInterrupt:
+        pass 
+
+def cbCamera(data):
+    
+    camera_command = data.data
+
+    my_seeker = seeker.Seeker()
+
+    try:
+        my_seeker.open_serial()
+        start_time = time.time()
+
+        command = my_seeker.calculate_camera_cmd(camera_command)
         my_seeker.send_command(command)
 
     except KeyboardInterrupt:
@@ -39,7 +54,8 @@ def callback(data):
 def listener():
     
     rospy.init_node('listener', anonymous=True)
-    rospy.Subscriber('seeker_angle', Int16MultiArray, callback)
+    rospy.Subscriber('seeker_gimbal', Int16MultiArray, cbGimbal)
+    rospy.Subscriber('seeker_camera', String, cbCamera)
 
     rospy.spin()
 

@@ -4,11 +4,13 @@
     <arg name = "roll" default = "0"/>
     <arg name = "pitch" default = "0"/>
     <arg name = "yaw" default = "0"/>
+    <arg name = "cmr_cmd" default = "stop_zoom"/>
 
     <param name="mode" type="int" value = "$(arg mode)"/>
     <param name="roll" type="int" value="$(arg roll)"/>
     <param name="pitch" type="int" value="$(arg pitch)"/>
     <param name="yaw" type="int" value="$(arg yaw)"/>
+    <param name="cmr_cmd" type="str" value="$(arg cmr_cmd)"/>
 
     <node pkg="seeker-ros" type="listener.py" name="listener"/>
     <node pkg="timed_roslaunch" type="timed_roslaunch.sh" args="1 seeker-ros talker.launch" name="timed_roslaunch" output="screen" />
