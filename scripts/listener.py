@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import rospy, seeker, time
 from std_msgs.msg import Int16MultiArray
-from std_msgs.msg import String
+from seeker_ros.msg import seekerCamera
 import numpy as np
 
 def cbGimbal(data):
@@ -36,27 +36,21 @@ def cbGimbal(data):
         pass 
 
 def cbCamera(data):
-    
-    camera_command = data.data
+    camera_command = data.cmr_cmd
+    camera_time = data.time
 
     my_seeker = seeker.Seeker()
-
-    try:
-        my_seeker.open_serial()
-        start_time = time.time()
-
-        command = my_seeker.calculate_camera_cmd(camera_command)
-        my_seeker.send_command(command)
-
-    except KeyboardInterrupt:
-        pass 
+    my_seeker.open_serial()
+    
+    command = my_seeker.calculate_camera_cmd(camera_command)
+    my_seeker.send_command(command)
 
 def listener():
     
     rospy.init_node('listener', anonymous=True)
     rospy.Subscriber('seeker_gimbal', Int16MultiArray, cbGimbal)
-    rospy.Subscriber('seeker_camera', String, cbCamera)
-
+    rospy.Subscriber('seeker_camera', seekerCamera, cbCamera)
+    
     rospy.spin()
 
 if __name__ == '__main__':
