@@ -4,15 +4,18 @@
     <arg name = "roll" default = "0"/>
     <arg name = "pitch" default = "0"/>
     <arg name = "yaw" default = "0"/>
-    <arg name = "cmr_cmd" default = "stop_zoom"/>
+    <arg name = "camera" default = "stop_zoom"/>
+    <arg name = "time" default = "1"/>
 
     <param name="mode" type="int" value = "$(arg mode)"/>
     <param name="roll" type="int" value="$(arg roll)"/>
     <param name="pitch" type="int" value="$(arg pitch)"/>
     <param name="yaw" type="int" value="$(arg yaw)"/>
-    <param name="cmr_cmd" type="str" value="$(arg cmr_cmd)"/>
+    <param name="camera" type="str" value="$(arg camera)"/>
+    <param name="time" type="double" value="$(arg time)"/>
 
-    <node pkg="seeker-ros" type="listener.py" name="listener"/>
-    <node pkg="timed_roslaunch" type="timed_roslaunch.sh" args="1 seeker-ros talker.launch" name="timed_roslaunch" output="screen" />
+    <node pkg="seeker_ros" type="listener.py" name="listener"/>
+    <node pkg="seeker_ros" type="talker.py" name="talker" output="screen"/>
+    <!-- <node pkg="timed_roslaunch" type="timed_roslaunch.sh" args="1 seeker_ros talker.launch" name="timed_roslaunch" output="screen" /> -->
 
 </launch>
