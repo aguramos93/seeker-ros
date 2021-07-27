@@ -17,7 +17,7 @@
         "file:///$(find your_camera_package)/config/your_camera.yaml" -->
         <arg name="camera_info_url" value="" />
         <!-- flip the image horizontally (mirror it) -->
-        <arg name="flip_horizontal" value="false" />
+        <arg name="flip_horizontal" value="true" />
         <!-- flip the image vertically -->
         <arg name="flip_vertical" value="true" />
         <!-- visualize on an image_view window the stream generated -->
