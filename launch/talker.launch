@@ -1,5 +1,5 @@
 <launch>
 
-    <node pkg="seeker-ros" type="talker.py" name="talker" />
+    <node pkg="seeker_ros" type="talker.py" name="talker" />
 
 </launch>
