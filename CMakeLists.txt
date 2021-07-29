@@ -19,7 +19,10 @@ add_message_files(
   seekerCamera.msg
 )
 
-# add_service_files(FILES AddTwoInts.srv)
+add_service_files(
+  FILES 
+  GoToWaypoint.srv
+)
 
 ## Generate added messages and services
 generate_messages(
@@ -36,6 +39,11 @@ catkin_package(
 ## Build talker and listener
 include_directories(include ${catkin_INCLUDE_DIRS})
 
-catkin_install_python(PROGRAMS scripts/talker.py scripts/listener.py scripts/test_video_resource.py
+catkin_install_python(PROGRAMS 
+  scripts/talker.py 
+  scripts/listener.py 
+  scripts/test_video_resource.py 
+  scripts/waypoints_server.py
+  scripts/track_waypoints.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
