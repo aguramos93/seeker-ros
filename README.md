@@ -8,6 +8,13 @@ Guide to install and configure [ROS](http://wiki.ros.org/melodic/Installation/Ub
 
 Guide to install [Python3](https://phoenixnap.com/kb/how-to-install-python-3-ubuntu) on Ubuntu 18.04.
 
+To see the streaming of the camera we also need to install opencv:
+
+```
+$ sudo apt update
+$ sudo apt install python3-opencv
+```
+
 ## How to install and use
 Download from:
 
