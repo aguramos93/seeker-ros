@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="seeker_ros" type="waypoints_server.py" name="server" output="screen"/>
+    <node pkg="timed_roslaunch" type="timed_roslaunch.sh" args="1 seeker_ros track_waypoints.launch" name="timed_roslaunch" output="screen" />
+</launch>
