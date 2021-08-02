@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="seeker_ros" type="track_waypoints.py" name="track_waypoints" output="screen"/>
+</launch>

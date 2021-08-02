@@ -15,7 +15,6 @@
     <param name="time" type="double" value="$(arg time)"/>
 
     <node pkg="seeker_ros" type="listener.py" name="listener"/>
-    <node pkg="seeker_ros" type="talker.py" name="talker" output="screen"/>
-    <!-- <node pkg="timed_roslaunch" type="timed_roslaunch.sh" args="1 seeker_ros talker.launch" name="timed_roslaunch" output="screen" /> -->
+    <node pkg="seeker_ros" type="talker.py" name="talker"/>
 
 </launch>

@@ -1,5 +1,0 @@
-<launch>
-
-    <node pkg="seeker_ros" type="talker.py" name="talker" />
-
-</launch>
