@@ -35,7 +35,7 @@ def save_waypoints():
         file_name = file_name + '.yaml'
 
     # Check we are actually receiving pose
-    rospy.loginfo('Reading pose from: %s', pose_url)
+    rospy.loginfo('Reading waypoint from: %s', pose_url)
 
     # Assure that plans folder exists in plan_package
     plans_dir = rospkg.RosPack().get_path(args.plan_package) + '/plans/'
@@ -47,7 +47,7 @@ def save_waypoints():
     rospy.loginfo('Waypoints will be saved to: %s', file_url)
 
     for wp_id in range(1000):
-        if raw_input("Press Enter to save current pose or q to quit... ") is 'q':
+        if raw_input("Press Enter to save current waypoint or q to quit... ") is 'q':
             break
 
         # print(current_pose) # debug!
